@@ -1,7 +1,7 @@
 params.bam = "."
 
 bam_set = Channel.fromPath("${params.bam}/*.bam")
-kmer_set = Channel.from(2..8)
+kmer_set = Channel.from(2..12)
 bam_set.combine(kmer_set).into { bam_kmer }
 
 process kmer_count {
