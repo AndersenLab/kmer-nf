@@ -26,7 +26,7 @@ process kmer_count {
 
 process kmer_join {
 
-    publishDir 'results'
+    publishDir 'results', mode: 'copy'
 
     input:
         file("out*.tsv.gz") from out.toSortedList()
@@ -35,6 +35,6 @@ process kmer_join {
         file("kmers.tsv.gz")
 
     """
-        zcat *.tsv.gz | gzip > kmers.tsv.gz
+        zcat *.tsv.gz | grep -v 'freq' | pigz > kmers.tsv.gz
     """
 }
